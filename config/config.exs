@@ -7,6 +7,15 @@
 # General application configuration
 import Config
 
+config :ueberauth, Ueberauth,
+  providers: [
+    github: {Ueberauth.Strategy.Github, [default_scope: "user:email"]}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "your-client-id",
+  client_secret: "your-client-secret"
+
 config :double_auth,
   ecto_repos: [DoubleAuth.Repo]
 
@@ -44,10 +53,10 @@ config :tailwind,
   version: "3.3.2",
   default: [
     args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
+--config=tailwind.config.js
+--input=css/app.css
+--output=../priv/static/assets/app.css
+),
     cd: Path.expand("../assets", __DIR__)
   ]
 
